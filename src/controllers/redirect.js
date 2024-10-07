@@ -6,6 +6,6 @@ function redirect(req, res) {
   res.sendFile(join(__dirname, "/index.html"));
 }
 
-export default {
+module.exports = {
   redirect
 };
