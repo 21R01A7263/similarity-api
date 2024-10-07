@@ -1,6 +1,6 @@
 const express = require('express');
 const videoController = require('../controllers/videoController');
-const redirect = require('../controllers/redirect');
+const redirect = require('../controllers/redirect').default;
 const path = require('path');
 
 const router = express.Router();
