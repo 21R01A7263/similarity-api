@@ -26,9 +26,9 @@ async function getSimilarVideos(req, res) {
   }
 }
 
-function redirect(req, res) {
-  res.sendFile(path.join(__dirname, 'index.html'));
-}
+// function redirect(req, res) {
+//   res.sendFile(path.join(__dirname, 'index.html'));
+// }
 
 function extractVideoId(url) {
   const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
@@ -37,5 +37,5 @@ function extractVideoId(url) {
 }
 
 module.exports = {
-  getSimilarVideos,
+  getSimilarVideos
 };
