@@ -1,11 +1,11 @@
-import { Router } from 'express';
-import { getSimilarVideos } from '../controllers/videoController';
-import { redirect as _redirect } from '../controllers/redirect';
-import path from 'path';
+const express = require('express');
+const videoController = require('../controllers/videoController');
+// const redirect = require('../controllers/redirect');
+const path = require('path');
 
-const router = Router();
+const router = express.Router();
 
-router.post("/get-similar", getSimilarVideos);
-router.get("/", _redirect);
+router.post("/get-similar", videoController.getSimilarVideos);
+router.get("/", videoController.redirect);
 
-export default router;
+module.exports = router;

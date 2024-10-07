@@ -1,9 +1,9 @@
 // const youtubeService = require("../services/youtubeService");
 
-import { join } from 'path';
+const path = require('path');
 
 function redirect(req, res) {
-  res.sendFile(join(__dirname, "/index.html"));
+  res.sendFile(path.join(__dirname, "getpage.html"));
 }
 
 module.exports = {
