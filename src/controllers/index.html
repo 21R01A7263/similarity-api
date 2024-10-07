@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+        }
+
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgb(204, 197, 197);
+            border-radius: 10px;
+        }
+
+        #working {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5vw;
+            font-weight: 600;
+            letter-spacing: 0.074rem;
+        }
+
+        #circle {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            background-color: #06EE94;
+            border-radius: 50%;
+            margin-bottom: 0.074rem;
+        }
+
+        #endpoint {
+            display: inline;
+            font-family: monospace;
+            border: 1px solid #545555;
+            padding: 0.413rem;
+            border-radius: 5px;
+        }
+
+        #example {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2vw;
+        }
+
+        #codecontent {
+            width: 90%;
+            max-height: 13rem;
+            overflow-y: auto;
+            background-color: #2e2e2e;
+            color: #ffffff;
+            padding: 0.625rem;
+            border-radius: 0.313rem;
+            font-family: monospace;
+            white-space: pre;
+            text-align: left;
+            font-size: 1.125rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        #version {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.4vw;
+            font-weight: 600;
+            letter-spacing: 0.074rem;            
+            border-radius: 500px;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            async function getFirstVersion() {
+            const url = 'https://nodejs.org/download/release/index.json';
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                const firstVersion = data[0].version;
+                console.log('First version:', firstVersion);
+                document.getElementById('txtversion').textContent = firstVersion;
+                return firstVersion;
+            } catch (error) {
+                console.error('Error fetching or processing data:', error);
+            }
+        }
+        function replaceContent(){
+            
+    const randomNum = Math.floor(Math.random() * 4) + 1;
+
+    const exampleDiv = document.getElementById('example');
+    const codeContentDiv = document.getElementById('codecontent');
+
+    let exampleText = '';
+    let codeContent = '';
+
+    switch (randomNum) {
+        case 1: 
+            exampleText = 'Try hitting <div id="endpoint">/api/get-similar</div> endpoint in Node.js.';
+            codeContent = `const axios = require('axios');
+
+const url = 'https://your-api-domain.com/api/get-similar';
+const payload = { videoUrl: 'https://youtube.com/watch?v=dQw4w9WgXcQ' };
+
+axios.post(url, payload)
+.then(response => {
+    console.log(JSON.stringify(response.data, null, 2));
+})
+.catch(error => {
+    console.error('Error:', error.response ? error.response.status : error.message);
+    console.error(error.response ? error.response.data : error.message);
+});`;
+            break;
+
+        case 2: 
+            exampleText = 'Try hitting <div id="endpoint">/api/get-similar</div> endpoint in Python.';
+            codeContent = `import requests
+import json
+
+url = "https://your-api-domain.com/api/get-similar"
+payload = {"videoUrl": "https://youtube.com/watch?v=dQw4w9WgXcQ"}
+headers = {"Content-Type": "application/json"}
+
+response = requests.post(url, data=json.dumps(payload), headers=headers)
+
+if response.status_code == 200:
+    similar_videos = response.json()
+    print(json.dumps(similar_videos, indent=2))
+else:
+    print(f"Error: {response.status_code}")
+    print(response.text)`;
+            break;
+
+        case 3: 
+            exampleText = 'Try hitting <div id="endpoint">/api/get-similar</div> endpoint in Ruby.';
+            codeContent = `require 'net/http'
+require 'uri'
+require 'json'
+
+uri = URI('https://your-api-domain.com/api/get-similar')
+payload = { videoUrl: 'https://youtube.com/watch?v=dQw4w9WgXcQ' }
+
+http = Net::HTTP.new(uri.host, uri.port)
+http.use_ssl = true
+request = Net::HTTP::Post.new(uri.path, 'Content-Type' => 'application/json')
+request.body = payload.to_json
+
+response = http.request(request)
+
+if response.code == '200'
+  similar_videos = JSON.parse(response.body)
+  puts JSON.pretty_generate(similar_videos)
+else
+  puts "Error: #{response.code}"
+  puts response.body`;
+            break;
+
+        case 4: 
+            exampleText = 'Try hitting <div id="endpoint">/api/get-similar</div> endpoint in Go.';
+            codeContent = `package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+)
+
+func main() {
+    url := "https://your-api-domain.com/api/get-similar"
+    payload := map[string]string{"videoUrl": "https://youtube.com/watch?v=dQw4w9WgXcQ"}
+
+    jsonPayload, _ := json.Marshal(payload)
+
+    resp, err := http.Post(url, "application/json", bytes.NewBuffer(jsonPayload))
+    if err != nil {
+        fmt.Println("Error:", err)
+        return
+    }
+    defer resp.Body.Close()
+
+    body, _ := ioutil.ReadAll(resp.Body)
+
+    if resp.StatusCode == 200 {
+        var similarVideos interface{}
+        json.Unmarshal(body, &similarVideos)
+        prettyJSON, _ := json.MarshalIndent(similarVideos, "", "  ")
+        fmt.Println(string(prettyJSON))
+    } else {
+        fmt.Println("Error:", resp.Status)
+        fmt.Println(string(body))
+    }
+}`;
+            break;
+    }
+
+    exampleDiv.innerHTML = exampleText;
+    codeContentDiv.textContent = codeContent;
+};
+
+replaceContent();
+getFirstVersion();   
+}
+         
+    </script>
+</head>
+
+<body>
+
+    <div class="w-100 h-screen bg-slate-200 flex justify-center items-center text-white">
+        <div class="min-w-[60%] max-w-[60%] min-h-[26rem] max-h-[26rem] bg-zinc-800 rounded-2xl shadow-lg shadow-slate-900">
+            <div id="topwrapper" class="w-full flex flex-row my-1 justify-between items-center">
+                <div id="working" class="mx-8 my-5">API is live!</div>
+                <div id="version" class="flex items-center mx-8 my-5">
+                    <div id="content">
+                        <span id="circle"></span>
+                        <span>npm </span>
+                        <span id="txtversion"></span>
+                    </div>
+                    
+                </div>
+            </div>
+            <div id="strikeout" class="w-full h-0.5 flex justify-center rounded-2xl">
+                <div id="strikeline" class="w-[95%] h-full bg-slate-400 rounded-2xl"></div>
+            </div>
+            <div id="example" class="mx-8 my-6"></div>
+            <div id="codecontent" class="mx-8 my-5 rounded-lg"></div>
+        </div>
+    </div>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</body>
+
+</html>
