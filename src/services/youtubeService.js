@@ -24,7 +24,6 @@ async function searchSimilarVideos(videoDetails, originalVideoId) {
   const queries = [
     videoDetails.title,
     `${videoDetails.title} ${keywords}`,
-    // `${keywords}`,
     `${videoDetails.title} trending`,
     `${videoDetails.title} new`,
   ];
