@@ -1,5 +1,3 @@
-// const youtubeService = require("../services/youtubeService");
-
 const path = require('path');
 
 function redirect(req, res) {
