@@ -105,7 +105,7 @@
             exampleText = 'Try hitting <div id="endpoint">/api/get-similar</div> endpoint in Node.js.';
             codeContent = `const axios = require('axios');
 
-const url = 'https://your-api-domain.com/api/get-similar';
+const url = 'https://yt-similarity.vercel.app/api/get-similar';
 const payload = { videoUrl: 'https://youtube.com/watch?v=dQw4w9WgXcQ' };
 
 axios.post(url, payload)
@@ -123,7 +123,7 @@ axios.post(url, payload)
             codeContent = `import requests
 import json
 
-url = "https://your-api-domain.com/api/get-similar"
+url = "https://yt-similarity.vercel.app/api/get-similar"
 payload = {"videoUrl": "https://youtube.com/watch?v=dQw4w9WgXcQ"}
 headers = {"Content-Type": "application/json"}
 
@@ -143,7 +143,7 @@ else:
 require 'uri'
 require 'json'
 
-uri = URI('https://your-api-domain.com/api/get-similar')
+uri = URI('https://yt-similarity.vercel.app/api/get-similar')
 payload = { videoUrl: 'https://youtube.com/watch?v=dQw4w9WgXcQ' }
 
 http = Net::HTTP.new(uri.host, uri.port)
@@ -174,7 +174,7 @@ import (
 )
 
 func main() {
-    url := "https://your-api-domain.com/api/get-similar"
+    url := "https://yt-similarity.vercel.app/api/get-similar"
     payload := map[string]string{"videoUrl": "https://youtube.com/watch?v=dQw4w9WgXcQ"}
 
     jsonPayload, _ := json.Marshal(payload)
